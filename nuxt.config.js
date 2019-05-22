@@ -16,8 +16,6 @@ module.exports = {
   },
   plugins: ['~/plugins/vuetify.js'],
   css: ['~/assets/style/app.styl'],
-  
-
   /*
   ** Customize the progress bar color
   */
@@ -26,17 +24,17 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    extractCSS: true,
-    extend (config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+    // extractCSS: true,
+    // extend (config, ctx) {
+    //   // Run ESLint on save
+    //   if (ctx.isDev && ctx.isClient) {
+    //     config.module.rules.push({
+    //       enforce: 'pre',
+    //       test: /\.(js|vue)$/,
+    //       loader: 'eslint-loader',
+    //       exclude: /(node_modules)/
+    //     })
+    //   }
+    // }
   }
 }
