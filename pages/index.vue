@@ -48,38 +48,31 @@
           <h2>Review Your Details and Submit</h2>
           <br>
           <br>
-          
-           <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Current Address</v-list-item-title>
-                <div v-for="item in locationInfo">
-              <v-list-item-subtitle>{{item}}</v-list-item-subtitle>
+
+          <v-list>
+              <h3>Current Address</h3>
+              <div v-for="item in locationInfo">
+                <div class="list">{{item}}</div>
               </div>
-              </v-list-item-content>
-            </v-list-item>
+          </v-list>
           <br>
           <hr>
           <br>
-          <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Delivery Details</v-list-item-title>
-                <div v-for="item in detailInfo">
-              <v-list-item-subtitle>{{item}}</v-list-item-subtitle>
+          <v-list>
+              <h3>Delivery Details</h3>
+              <div v-for="item in detailInfo">
+                <div class="list">{{item}}</div>
               </div>
-              </v-list-item-content>
-            </v-list-item>
+          </v-list>
           <br>
           <hr>
           <br>
-          <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Delivery Service Type</v-list-item-title>
-                <div v-for="item in servicesInfo">
-              <v-list-item-subtitle>{{item}}</v-list-item-subtitle>
+          <v-list>
+              <h3>Delivery Service Type</h3>
+              <div v-for="item in servicesInfo">
+                <div class="list">{{item}}</div>
               </div>
-              </v-list-item-content>
-            </v-list-item>
-           
+          </v-list>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -131,5 +124,7 @@ export default {
 };
 </script>
 <style scoped>
-
+.list, h3{
+  padding-left: 20px;
+}
 </style>
