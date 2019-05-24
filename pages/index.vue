@@ -50,29 +50,32 @@
           <br>
 
           <v-list>
-              <h3>Current Address</h3>
-              <div v-for="item in locationInfo">
-                <div class="list">{{item}}</div>
-              </div>
+            <h3>Current Address</h3>
+            <div v-for="item in locationInfo">
+              <div class="list">{{item}}</div>
+            </div>
           </v-list>
           <br>
           <hr>
           <br>
           <v-list>
-              <h3>Delivery Details</h3>
-              <div v-for="item in detailInfo">
-                <div class="list">{{item}}</div>
-              </div>
+            <h3>Delivery Details</h3>
+            <div v-for="item in detailInfo">
+              <div class="list">{{item}}</div>
+            </div>
           </v-list>
           <br>
           <hr>
           <br>
           <v-list>
-              <h3>Delivery Service Type</h3>
-              <div v-for="item in servicesInfo">
-                <div class="list">{{item}}</div>
-              </div>
+            <h3>Delivery Service Type</h3>
+            <div v-for="item in servicesInfo">
+              <div class="list">{{item}}</div>
+            </div>
           </v-list>
+
+          <v-btn class="previous" @click="previous('submit')">previous</v-btn>
+          <v-btn class="submit" color="primary" @click="submit">Next Step</v-btn>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -116,6 +119,8 @@ export default {
           this.purchaseState = 1;
         case "Services":
           this.purchaseState = 2;
+        case "submit":
+          this.purchaseState = 3;
         default:
           this.purchaseState = 1;
       }
@@ -124,7 +129,8 @@ export default {
 };
 </script>
 <style scoped>
-.list, h3{
+.list,
+h3 {
   padding-left: 20px;
 }
 </style>

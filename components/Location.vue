@@ -51,14 +51,14 @@
           :error-messages="countryErrors"
         ></v-select>
 
-        <v-btn class="submit" color="primary" @click="submit" >Next Step</v-btn>
+        <v-btn class="submit" color="primary" @click="submit">Next Step</v-btn>
       </v-container>
     </v-form>
   </div>
 </template>
 <script>
-import { validationMixin } from "vuelidate";
-import { required, maxLength, email } from "vuelidate/lib/validators";
+import { VeeValidate } from "vee-validate";
+
 export default {
   mixins: [validationMixin],
 
@@ -76,64 +76,46 @@ export default {
     city: "Tehran",
     state: "Tehran",
     country: "Iran",
-    countries: ["Iran", "Italy", "US", "UK"]
-  }),
-  computed: {
-    addressErrors() {
-      const errors = [];
-      if (!this.$v.addressLine1.$dirty) return errors;
-      !this.$v.addressLine1.required &&
-        errors.push("addressLine1 is required.");
-      !this.$v.addressLine1.maxLength &&
-        errors.push("addressLine1 must be at most 10 characters long");
-      return errors;
-    },
-    postCodeErrors() {
-      const errors = [];
-      if (!this.$v.postCode.$dirty) {
-        return errors;
+    countries: ["Iran", "Italy", "US", "UK"],
+    dictionary: {
+      custome: {
+        addressLine1: {
+          required: () => "آدرس 1 را وارد کنید",
+          max: "آدرس 1 نباید بیشتر از 200 کاراکتر باشد"
+        },
+        postCode: {
+          required: () => "کد پستی را وارد کنید"
+        },
+        city: {
+          required: () => "شهر را وارد کنید"
+        },
+        state: {
+          required: () => "استان را وارد کنید"
+        },
+        country: {
+          required: () => "کشور مورد نظر را انتخاب کنید"
+        },
       }
-
-      !this.$v.postCode.required && errors.push("postCode is required");
-
-      return errors;
-    },
-    cityErrors() {
-      const errors = [];
-      if (!this.$v.city.$dirty) {
-        return errors;
-      }
-      !this.$v.city.required && errors.push("city is required");
-      return errors;
-    },
-    stateErrors() {
-      const errors = [];
-      if (!this.$v.state.$dirty) {
-        return errors;
-      }
-      !this.$v.state.required && errors.push("state is required");
-      return errors;
-    },
-    countryErrors() {
-      const errors = [];
-      if (!this.$v.country.$dirty) {
-        return errors;
-      }
-      !this.$v.country.required && errors.push("country is required");
-      return errors;
     }
+  }),
+  mounted() {
+    this.$validator.localize("en", this.dictionary);
   },
 
   methods: {
     submit() {
-      this.$v.$touch();
-      if(this.$v.$invalid)
-      return;
+      this.$validator.validateAll();
+      if (this.$validator.$invalid) return;
 
-      const info = [this.addressLine1, this.addressLine2, this.postCode, this.city, this.state,
-        this.country];
-        this.$emit('locationInfoWasSet', info);
-      
+      const info = [
+        this.addressLine1,
+        this.addressLine2,
+        this.postCode,
+        this.city,
+        this.state,
+        this.country
+      ];
+      this.$emit("locationInfoWasSet", info);
     }
   }
 };
