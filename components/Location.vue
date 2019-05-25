@@ -7,63 +7,67 @@
           :label="$t('location.addressLine1')"
           v-validate="'required'"
           v-model="addressLine1"
-          :counter="10"
-          :error-messages="errors.collect('address1')"
-          required
+          name="addressLine1"
+          :data-vv-as="$t('location.addressLine1')"
         ></v-text-field>
+        <span>{{ errors.first('addressLine1') }}</span>
 
         <v-text-field :label="$t('location.addressLine2')"></v-text-field>
 
         <v-text-field
           :label="$t('location.postCode')"
-          :error-messages="errors.collect('postCode')"
           v-model="postCode"
           v-validate="'required'"
-          required
+          name="postCode"
+          :data-vv-as="$t('location.postCode')"
         ></v-text-field>
+        <span>{{ errors.first('postCode') }}</span>
 
         <v-text-field
           :label="$t('location.city')"
-          :error-messages="errors.collect('city')"
           v-validate="'required'"
           v-model="city"
-          required
+          name="city"
+          :data-vv-as="$t('location.city')"
         ></v-text-field>
+        <span>{{ errors.first('city') }}</span>
 
         <v-text-field
           :label="$t('location.state')"
-          :error-messages="errors.collect('state')"
           v-validate="'required'"
           v-model="state"
-          required
+          name="state"
+          :data-vv-as="$t('location.state')"
         ></v-text-field>
+        <span>{{ errors.first('city') }}</span>
 
         <v-select
           :label="$t('location.country')"
-          :error-messages="errors.collect('country')"
           v-model="country"
           :items="countries"
           v-validate="'required'"
-          required
+          name="country"
+          :data-vv-as="$t('location.country')"
         ></v-select>
+        <span>{{ errors.first('country') }}</span>
 
         <v-text-field
           :label="$t('location.phoneNo')"
           v-validate="{ required: true, regex: /^[0][9][0-9]{9,9}$/}"
-          v-model="phone"
-          :error-messages="errors.collect('phoneNo')"
-          data-vv-name="phone"
-          required
+          v-model="phoneNo"
+          name="phoneNo"
+          :data-vv-as="$t('location.phoneNo')"
         ></v-text-field>
+        <span>{{ errors.first('phoneNo') }}</span>
 
         <v-text-field
           :label="$t('location.nationalCode')"
           v-validate="{ required: true, regex: /^[0-9]{10,10}$/}"
-          v-model="code"
-          :error-messages="errors.collect('nationalCode')"
-          data-vv-name="code"
-          required
+          v-model="nationalCode"
+          name="nationalCode"
+          :data-vv-as="$t('location.nationalCode')"
         ></v-text-field>
+        <span>{{ errors.first('nationalCode') }}</span>
 
         <v-btn class="submit" color="primary" @click="submit">{{$t("stepper.nextStep")}}</v-btn>
       </v-container>
@@ -72,11 +76,7 @@
 </template>
 
 <script>
-import { VeeValidate } from "vee-validate";
 export default {
-  $_veeValidate: {
-    validator: "new"
-  },
   data: () => ({
     addressLine1: "",
     addressLine2: "",
@@ -85,36 +85,9 @@ export default {
     state: "Tehran",
     country: "Iran",
     countries: ["Iran", "Italy", "US", "UK"],
-    dictionary: {
-      custom: {
-        phoneNo: {
-          required: () => "شماره همراه را وارد نمایید",
-          regex: () => "شماره همراه را صحیح وارد نمایید"
-        },
-        nationalCode: {
-          required: () => "کد ملی را وارد نمایید"
-        },
-        state: {
-          required: () => "استان را وارد نمایید"
-        },
-        city: {
-          required: () => "شهر را وارد نمایید"
-        },
-        country:{
-          required: () => "کشور را وارد نمایید"
-        },
-        postCode: {
-          required: () => "کد پستی را وارد نمایید"
-        },
-        address1: {
-          required: () => "آدرس را وارد نمایید"
-        }
-      }
-    }
+    phoneNo: "",
+    nationalCode: ""
   }),
-  mounted() {
-    this.$validator.localize("fa", this.dictionary);
-  },
 
   methods: {
     submit() {

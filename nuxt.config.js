@@ -1,6 +1,6 @@
 module.exports = {
   modules: [
- 
+   
   ],
 
   /*
@@ -18,7 +18,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js', '~/plugins/i18n.js'],
+  plugins: ['~/plugins/vuetify.js', '~/plugins/i18n.js', '~/plugins/vee-validate.js'],
   css: ['~/assets/style/main.css','~/assets/style/app.styl'],
   router:{
     middleware:'i18n'
