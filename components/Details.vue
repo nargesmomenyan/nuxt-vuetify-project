@@ -1,39 +1,33 @@
 <template>
   <div>
-    <h2>Enter the Details of your Delivery</h2>
+    <h2>{{$t("details.title")}}</h2>
     <v-form>
       <v-container>
         <v-text-field
-          label="Package Details"
+          :label="$t('details.packageDetails')"
           required
           v-model="packageDetails"
           :error-messages="packageDetailsErrors"
-          @input="$v.packageDetails.$touch()"
-          @blur="$v.packageDetails.$touch()"
         ></v-text-field>
 
         <v-text-field
-          label="weight"
+          :label="$t('details.weight')"
           type="number"
           v-model="weight"
           required
-          @input="$v.weight.$touch()"
-          @blur="$v.weight.$touch()"
           :error-messages="weightErrors"
         ></v-text-field>
 
         <v-text-field
-          label="Width"
+          :label="$t('details.width')"
           required
           type="number"
           v-model="width"
-          @input="$v.width.$touch()"
-          @blur="$v.width.$touch()"
           :error-messages="widthErrors"
         ></v-text-field>
 
         <v-text-field
-          label="Height"
+          :label="$t('details.Height')"
           required
           type="number"
           v-model="height"
@@ -43,7 +37,7 @@
         ></v-text-field>
 
         <v-text-field
-          label="Length"
+          :label="$t('details.Length')"
           type="number"
           v-model="length"
           @change="$v.length.$touch()"
@@ -51,8 +45,8 @@
           :error-messages="lengthErrors"
         ></v-text-field>
 
-        <v-btn class="previous" @click="previous">previous</v-btn>
-        <v-btn class="submit" color="primary" @click="submit">Next Step</v-btn>
+        <v-btn class="previous" @click="previous">{{$t("stepper.previous")}}</v-btn>
+        <v-btn class="submit" color="primary" @click="submit">{{$t("stepper.nextStep")}}</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -143,9 +137,9 @@ export default {
 </script>
 <style>
 .submit {
-  float: right;
+  float: left;
 }
 .previous {
-  float: left;
+  float: right;
 }
 </style>

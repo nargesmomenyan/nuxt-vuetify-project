@@ -8,27 +8,64 @@
           v-validate="'required'"
           v-model="addressLine1"
           :counter="10"
+          :error-messages="errors.collect('address1')"
           required
         ></v-text-field>
-        <span>{{ errors.first('addressLine1') }}</span>
 
         <v-text-field :label="$t('location.addressLine2')"></v-text-field>
 
-        <v-text-field :label="$t('postCode')" v-model="postCode" v-validate="'required'" required></v-text-field>
+        <v-text-field
+          :label="$t('location.postCode')"
+          :error-messages="errors.collect('postCode')"
+          v-model="postCode"
+          v-validate="'required'"
+          required
+        ></v-text-field>
 
-        <v-text-field :label="$t('city')" v-validate="'required'" v-model="city" required></v-text-field>
+        <v-text-field
+          :label="$t('location.city')"
+          :error-messages="errors.collect('city')"
+          v-validate="'required'"
+          v-model="city"
+          required
+        ></v-text-field>
 
-        <v-text-field :label="$t('state')" v-validate="'required'" v-model="state" required></v-text-field>
+        <v-text-field
+          :label="$t('location.state')"
+          :error-messages="errors.collect('state')"
+          v-validate="'required'"
+          v-model="state"
+          required
+        ></v-text-field>
 
         <v-select
-          :label="$t('country')"
+          :label="$t('location.country')"
+          :error-messages="errors.collect('country')"
           v-model="country"
           :items="countries"
           v-validate="'required'"
           required
         ></v-select>
 
-        <v-btn class="submit" color="primary" @click="submit">{{$t("nextStep")}}</v-btn>
+        <v-text-field
+          :label="$t('location.phoneNo')"
+          v-validate="{ required: true, regex: /^[0][9][0-9]{9,9}$/}"
+          v-model="phone"
+          :error-messages="errors.collect('phoneNo')"
+          data-vv-name="phone"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          :label="$t('location.nationalCode')"
+          v-validate="{ required: true, regex: /^[0-9]{10,10}$/}"
+          v-model="code"
+          :error-messages="errors.collect('nationalCode')"
+          data-vv-name="code"
+          required
+        ></v-text-field>
+
+        <v-btn class="submit" color="primary" @click="submit">{{$t("stepper.nextStep")}}</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -36,7 +73,6 @@
 
 <script>
 import { VeeValidate } from "vee-validate";
-
 export default {
   $_veeValidate: {
     validator: "new"
@@ -50,22 +86,28 @@ export default {
     country: "Iran",
     countries: ["Iran", "Italy", "US", "UK"],
     dictionary: {
-      custome: {
-        addressLine1: {
-          required: () => "آدرس 1 را وارد کنید",
-          max: "آدرس 1 نباید بیشتر از 200 کاراکتر باشد"
+      custom: {
+        phoneNo: {
+          required: () => "شماره همراه را وارد نمایید",
+          regex: () => "شماره همراه را صحیح وارد نمایید"
         },
-        postCode: {
-          required: () => "کد پستی را وارد کنید"
-        },
-        city: {
-          required: () => "شهر را وارد کنید"
+        nationalCode: {
+          required: () => "کد ملی را وارد نمایید"
         },
         state: {
-          required: () => "استان را وارد کنید"
+          required: () => "استان را وارد نمایید"
         },
-        country: {
-          required: () => "کشور مورد نظر را انتخاب کنید"
+        city: {
+          required: () => "شهر را وارد نمایید"
+        },
+        country:{
+          required: () => "کشور را وارد نمایید"
+        },
+        postCode: {
+          required: () => "کد پستی را وارد نمایید"
+        },
+        address1: {
+          required: () => "آدرس را وارد نمایید"
         }
       }
     }
@@ -76,18 +118,19 @@ export default {
 
   methods: {
     submit() {
-      this.$validator.validateAll();
-      // if (this.$validator.$invalid) return;
-
-      const info = [
-        this.addressLine1,
-        this.addressLine2,
-        this.postCode,
-        this.city,
-        this.state,
-        this.country
-      ];
-      this.$emit("locationInfoWasSet", info);
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          const info = [
+            this.addressLine1,
+            this.addressLine2,
+            this.postCode,
+            this.city,
+            this.state,
+            this.country
+          ];
+          this.$emit("locationInfoWasSet", info);
+        }
+      });
     }
   }
 };
@@ -95,6 +138,6 @@ export default {
 
 <style>
 .submit {
-  float: right;
+  float: left;
 }
 </style>

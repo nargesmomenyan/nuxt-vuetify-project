@@ -14,7 +14,7 @@
               <div style="text-align:center">
                 <i class="material-icons" style="font-size:48px">{{step.icon}}</i>
 
-                <div>{{step.label}}</div>
+                <div>{{ $t(`stepper.steps.${index+1}`)}}</div>
               </div>
               <v-divider></v-divider>
             </v-stepper-step>
@@ -42,12 +42,12 @@
 
         <v-stepper-items>
           <v-stepper-content step="4">
-            <h2>Review Your Details and Submit</h2>
+            <h2>{{ $t(`stepper.SubmitTitle`)}}</h2>
             <br>
             <br>
 
             <v-list>
-              <h3>Current Address</h3>
+              <h3>{{ $t(`stepper.steps.1`)}}</h3>
               <div v-for="item in locationInfo">
                 <div class="list">{{item}}</div>
               </div>
@@ -56,7 +56,7 @@
             <hr>
             <br>
             <v-list>
-              <h3>Delivery Details</h3>
+              <h3>{{ $t(`stepper.steps.2`)}}</h3>
               <div v-for="item in detailInfo">
                 <div class="list">{{item}}</div>
               </div>
@@ -65,13 +65,13 @@
             <hr>
             <br>
             <v-list>
-              <h3>Delivery Service Type</h3>
+              <h3>{{ $t(`stepper.steps.3`)}}</h3>
               <div v-for="item in servicesInfo">
                 <div class="list">{{item}}</div>
               </div>
             </v-list>
 
-            <v-btn class="previous" @click="previous('submit')">previous</v-btn>
+            <v-btn class="previous" @click="previous('submit')">{{$t("stepper.previous")}}</v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -88,22 +88,18 @@ export default {
   data: () => ({
     steps: [
       {
-        label: "آدرس",
         completed: false,
         icon: "not_listed_location"
       },
       {
-        label: "جزئیات بسته",
         completed: false,
         icon: "list_alt"
       },
       {
-        label: "انتخاب سرویس",
         completed: false,
         icon: "devices"
       },
       {
-        label: "تأیید",
         completed: false,
         icon: "airport_shuttle"
       }

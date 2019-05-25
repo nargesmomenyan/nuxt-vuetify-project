@@ -1,6 +1,6 @@
 module.exports = {
   modules: [
-    ['nuxt-validate', { lang: 'fa' }],
+ 
   ],
 
   /*
@@ -15,8 +15,6 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel:'stylesheet', href:'https://fonts.googleapis.com/css?family=Ranga&display=swap'},
-      {rel: 'stylesheet', href:'https://static.mizfa.com/cdn/fonts/is/woff2/iransansweb_black.woff2'},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },

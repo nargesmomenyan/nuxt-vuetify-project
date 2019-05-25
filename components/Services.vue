@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>Select Your Services</h2>
+    <h2>{{$t("services.title")}}</h2>
     <v-form>
       <v-container>
         <v-select
-          label="Delivery Type"
+          :label="$t('services.DeliveryType')"
           v-model="deliveryType"
           :items="deliveryTypes"
           @change="$v.deliveryType.$touch()"
@@ -13,7 +13,7 @@
         ></v-select>
 
         <v-select
-          label="Packaging Type"
+          :label="$t('services.PackagingType')"
           v-model="packagingType"
           :items="packagingTypes"
           @change="$v.packagingType.$touch()"
@@ -22,7 +22,7 @@
         ></v-select>
 
         <v-select
-          label="Prefered Delivery Window"
+          :label="$t('services.time')"
           v-model="deliveryWindow"
           :items="deliveryWindows"
           @change="$v.deliveryWindow.$touch()"
@@ -30,8 +30,8 @@
           :error-messages="deliveryWindowErrors"
         ></v-select>
 
-        <v-btn class="previous" @click="previous">previous</v-btn>
-        <v-btn class="submit" color="primary" @click="submit">Next Step</v-btn>
+        <v-btn class="previous" @click="previous">{{$t("stepper.previous")}}</v-btn>
+        <v-btn class="submit" color="primary" @click="submit">{{$t("stepper.nextStep")}}</v-btn>
       </v-container>
     </v-form>
   </div>
@@ -103,9 +103,9 @@ export default {
 </script>
 <style>
 .submit {
-  float: right;
+  float: left;
 }
 .previous {
-  float: left;
+  float: right;
 }
 </style>
