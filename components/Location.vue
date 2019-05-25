@@ -62,7 +62,7 @@
 
         <v-text-field
           :label="$t('location.nationalCode')"
-          v-validate="{ required: true, regex: /^[0-9]{10,10}$/}"
+          v-validate="{ required: true, checkNationalCode:true}"
           v-model="nationalCode"
           name="nationalCode"
           :data-vv-as="$t('location.nationalCode')"
@@ -88,7 +88,23 @@ export default {
     phoneNo: "",
     nationalCode: ""
   }),
+  created() {
+    this.$validator.extend("checkNationalCode", {
+      validate(value, field) {
+        if (!/^\d{10}$/.test(value)) return false;
 
+        var check = parseInt(value[9]);
+        var sum = 0;
+        var i;
+        for (i = 0; i < 9; ++i) {
+          sum += parseInt(value[i]) * (10 - i);
+        }
+        sum %= 11;
+
+        return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
+      }
+    });
+  },
   methods: {
     submit() {
       this.$validator.validateAll().then(result => {

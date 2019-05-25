@@ -8,7 +8,7 @@
         "state": "استان",
         "country": "کشور",
         "phoneNo":"شماره همراه",
-        "nationalCode":"شماره ملی"
+        "nationalCode":"کد ملی"
     },
     "details": {
         "title": "اطلاعات بسته",
