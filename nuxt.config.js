@@ -1,4 +1,8 @@
 module.exports = {
+  modules: [
+    ['nuxt-validate', { lang: 'fa' }],
+  ],
+
   /*
   ** Headers of the page
   */
@@ -11,11 +15,19 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel:'stylesheet', href:'https://fonts.googleapis.com/css?family=Ranga&display=swap'},
+      {rel: 'stylesheet', href:'https://static.mizfa.com/cdn/fonts/is/woff2/iransansweb_black.woff2'},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js'],
-  css: ['~/assets/style/app.styl'],
+  plugins: ['~/plugins/vuetify.js', '~/plugins/i18n.js'],
+  css: ['~/assets/style/main.css','~/assets/style/app.styl'],
+  router:{
+    middleware:'i18n'
+  },
+  generate: {
+    routes: ['/', '/index', '/fa', '/fa/index']
+  },
   /*
   ** Customize the progress bar color
   */
@@ -24,17 +36,6 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    // extractCSS: true,
-    // extend (config, ctx) {
-    //   // Run ESLint on save
-    //   if (ctx.isDev && ctx.isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
+
   }
 }

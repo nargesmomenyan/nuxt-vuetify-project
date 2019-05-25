@@ -1,73 +1,45 @@
 <template>
   <div>
-    <h2>Setup Your Current Location</h2>
+    <h2>{{$t('location.title')}}</h2>
     <v-form>
       <v-container>
         <v-text-field
-          label="Address Line 1"
-          required
+          :label="$t('location.addressLine1')"
+          v-validate="'required'"
           v-model="addressLine1"
           :counter="10"
-          :error-messages="addressErrors"
-          @input="$v.addressLine1.$touch()"
-          @blur="$v.addressLine1.$touch()"
-        ></v-text-field>
-
-        <v-text-field label="Address Line 2"></v-text-field>
-
-        <v-text-field
-          label="Postcode"
-          v-model="postCode"
           required
-          @input="$v.postCode.$touch()"
-          @blur="$v.postCode.$touch()"
-          :error-messages="postCodeErrors"
         ></v-text-field>
+        <span>{{ errors.first('addressLine1') }}</span>
 
-        <v-text-field
-          label="City"
-          required
-          v-model="city"
-          @input="$v.city.$touch()"
-          @blur="$v.city.$touch()"
-          :error-messages="cityErrors"
-        ></v-text-field>
+        <v-text-field :label="$t('location.addressLine2')"></v-text-field>
 
-        <v-text-field
-          label="State"
-          required
-          v-model="state"
-          @input="$v.state.$touch()"
-          @blur="$v.state.$touch()"
-          :error-messages="stateErrors"
-        ></v-text-field>
+        <v-text-field :label="$t('postCode')" v-model="postCode" v-validate="'required'" required></v-text-field>
+
+        <v-text-field :label="$t('city')" v-validate="'required'" v-model="city" required></v-text-field>
+
+        <v-text-field :label="$t('state')" v-validate="'required'" v-model="state" required></v-text-field>
 
         <v-select
-          label="Country"
+          :label="$t('country')"
           v-model="country"
           :items="countries"
-          @change="$v.country.$touch()"
-          @blur="$v.country.$touch()"
-          :error-messages="countryErrors"
+          v-validate="'required'"
+          required
         ></v-select>
 
-        <v-btn class="submit" color="primary" @click="submit">Next Step</v-btn>
+        <v-btn class="submit" color="primary" @click="submit">{{$t("nextStep")}}</v-btn>
       </v-container>
     </v-form>
   </div>
 </template>
+
 <script>
 import { VeeValidate } from "vee-validate";
 
 export default {
-  mixins: [validationMixin],
-
-  validations: {
-    addressLine1: { required, maxLength: maxLength(10) },
-    postCode: { required },
-    city: { required },
-    state: { required },
-    country: { required }
+  $_veeValidate: {
+    validator: "new"
   },
   data: () => ({
     addressLine1: "",
@@ -94,18 +66,18 @@ export default {
         },
         country: {
           required: () => "کشور مورد نظر را انتخاب کنید"
-        },
+        }
       }
     }
   }),
   mounted() {
-    this.$validator.localize("en", this.dictionary);
+    this.$validator.localize("fa", this.dictionary);
   },
 
   methods: {
     submit() {
       this.$validator.validateAll();
-      if (this.$validator.$invalid) return;
+      // if (this.$validator.$invalid) return;
 
       const info = [
         this.addressLine1,

@@ -1,0 +1,15 @@
+{
+    "location": {
+        "title":"Setup Your Current Location",
+        "addressLine1": "Address Line 1",
+        "addressLine2": "Address Line 2",
+        "postCode":"Postcode",
+        "city": "City",
+        "state": "State",
+        "country":"Country"        
+    },
+    "stepper":{
+        "nextStep":"Next Step"
+
+    }
+}
