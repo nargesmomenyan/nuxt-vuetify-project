@@ -3,9 +3,12 @@
     <h2>{{$t('location.title')}}</h2>
     <v-form>
       <v-container>
-      
         <v-flex xs12 sm6 md4>
-         <persian-date-picker :gregorianDate="shipdate"   @selectedDate = "shipDateChanged"/>
+          <persian-date-picker
+            :gregorianDate="shipdate"
+            @selectedDate="shipDateChanged"
+            :label="$t('location.shipdate')"
+          ></persian-date-picker>
         </v-flex>
 
         <v-text-field
@@ -81,12 +84,10 @@
 </template>
 
 <script>
-
-import persianDatePicker from '~/components/UI/persian-date-picker'
+import persianDatePicker from "~/components/UI/persian-date-picker";
 export default {
   data: () => ({
-    
-    shipdate:  new Date('2020/01/01'),//.toISOString().substr(0,10), 
+    shipdate: new Date("2020/01/01").toISOString().substr(0,10),
     addressLine1: "",
     addressLine2: "",
     postCode: 3000,
@@ -115,13 +116,7 @@ export default {
       }
     });
   },
-  methods: {  
-    save(date){
-      this.$refs.menu.save(date);
-      this.persianShipDate = moment(date).format('jYYYY/jMM/jDD');
-      console.log(date);
-      console.log(this.persianShipDate);
-    },
+  methods: {
     submit() {
       this.$validator.validateAll().then(result => {
         if (result) {
@@ -137,13 +132,13 @@ export default {
         }
       });
     },
-    shipDateChanged($event){
+    shipDateChanged($event) {
       console.log($event);
       this.shipdate = $event.gregorianDate;
     }
   },
-  components:{
-    'persian-date-picker' :persianDatePicker
+  components: {
+    "persian-date-picker": persianDatePicker
   }
 };
 </script>
