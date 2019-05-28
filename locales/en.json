@@ -1,5 +1,6 @@
 {
     "location": {
+        "shipdate":"shipdate",
         "title": "Setup Your Current Location",
         "addressLine1": "Address Line 1",
         "addressLine2": "Address Line 2",
@@ -34,5 +35,8 @@
             "3": "Select Services",
             "4": "Review and Submit"
         }
+    },
+    "base":{
+        "close":"close"
     }
 }

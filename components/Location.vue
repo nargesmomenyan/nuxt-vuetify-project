@@ -3,6 +3,11 @@
     <h2>{{$t('location.title')}}</h2>
     <v-form>
       <v-container>
+      
+        <v-flex xs12 sm6 md4>
+         <persian-date-picker :gregorianDate="shipdate"   @selectedDate = "shipDateChanged"/>
+        </v-flex>
+
         <v-text-field
           :label="$t('location.addressLine1')"
           v-validate="'required'"
@@ -76,8 +81,12 @@
 </template>
 
 <script>
+
+import persianDatePicker from '~/components/UI/persian-date-picker'
 export default {
   data: () => ({
+    
+    shipdate:  new Date('2020/01/01'),//.toISOString().substr(0,10), 
     addressLine1: "",
     addressLine2: "",
     postCode: 3000,
@@ -88,6 +97,7 @@ export default {
     phoneNo: "",
     nationalCode: ""
   }),
+
   created() {
     this.$validator.extend("checkNationalCode", {
       validate(value, field) {
@@ -105,7 +115,13 @@ export default {
       }
     });
   },
-  methods: {
+  methods: {  
+    save(date){
+      this.$refs.menu.save(date);
+      this.persianShipDate = moment(date).format('jYYYY/jMM/jDD');
+      console.log(date);
+      console.log(this.persianShipDate);
+    },
     submit() {
       this.$validator.validateAll().then(result => {
         if (result) {
@@ -120,7 +136,14 @@ export default {
           this.$emit("locationInfoWasSet", info);
         }
       });
+    },
+    shipDateChanged($event){
+      console.log($event);
+      this.shipdate = $event.gregorianDate;
     }
+  },
+  components:{
+    'persian-date-picker' :persianDatePicker
   }
 };
 </script>
