@@ -1,6 +1,15 @@
 <template>
   <div>
     <v-container>
+      <div class="text-xs-center">
+        <v-btn color="primary" flat @click="showInfo = !showInfo">!More Info</v-btn>
+
+        <v-divider></v-divider>
+        <v-card v-collapse="showInfo">
+          <v-card-text>some fake information only for test</v-card-text>
+        </v-card>
+      </div>
+      <br>
       <v-stepper v-model="purchaseState">
         <v-stepper-header class="stepper__header">
           <div class="step" v-for="(step, index) in steps" :key="index">
@@ -83,9 +92,11 @@
 import Location from "~/components/Location";
 import Details from "~/components/Details";
 import Services from "~/components/Services";
+import { collapse } from "~/components/directives/collapse";
 
 export default {
   data: () => ({
+    showInfo: false,
     steps: [
       {
         completed: false,
@@ -142,6 +153,9 @@ export default {
           this.purchaseState = 1;
       }
     }
+  },
+  directives: {
+    collapse
   }
 };
 </script>
