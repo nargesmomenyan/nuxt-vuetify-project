@@ -17,7 +17,8 @@
         v-model="gregorianDate"
         @input="datePickerMenu = false"
         @change="save"
-       
+        v-bind="$attrs"
+        v-on="$listeners"
         locale="fa"
       ></v-date-picker>
     </v-menu>
