@@ -14,8 +14,7 @@
     <keep-alive>
       <component :is="selectedChart" :inputOptions="chartOptions"></component>
     </keep-alive>
-    <v-divider></v-divider>
-    <br>
+
     <v-container fluid>
       <v-card>
         <v-card-title>

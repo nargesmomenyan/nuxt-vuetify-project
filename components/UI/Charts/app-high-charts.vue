@@ -1,9 +1,9 @@
 <template>
-  <div class="chartElem">
+  <v-container fluid>
     <div class="row">
-      <highcharts class="chart" :options="chartOptions"></highcharts>
+      <vue-highcharts class="chart" :options="chartOptions"></vue-highcharts>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
